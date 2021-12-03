@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lixiaoshuang
  */
 @RestController
-@RequestMapping("polsris")
+@RequestMapping("polaris")
 public class ConsumerController {
     
     private ConsumerAPI consumerAPI = DiscoveryAPIFactory.createConsumerAPI();
