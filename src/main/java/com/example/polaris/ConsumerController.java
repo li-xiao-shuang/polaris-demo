@@ -19,8 +19,11 @@ package com.example.polaris;
 import com.alibaba.fastjson.JSONObject;
 import com.tencent.polaris.api.core.ConsumerAPI;
 import com.tencent.polaris.api.pojo.Instance;
+import com.tencent.polaris.api.pojo.ServiceEventKey;
 import com.tencent.polaris.api.rpc.GetAllInstancesRequest;
+import com.tencent.polaris.api.rpc.GetServiceRuleRequest;
 import com.tencent.polaris.api.rpc.InstancesResponse;
+import com.tencent.polaris.api.rpc.ServiceRuleResponse;
 import com.tencent.polaris.factory.api.DiscoveryAPIFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,4 +57,22 @@ public class ConsumerController {
         }
         return JSONObject.toJSONString(instances);
     }
+    
+    /**
+     * 获取服务规则
+     *
+     * @param namespace
+     * @param service
+     * @return
+     */
+    @RequestMapping(path = "rule")
+    public String getServiceRule(@RequestParam("namespace") String namespace, @RequestParam("service") String service) {
+        GetServiceRuleRequest getServiceRuleRequest = new GetServiceRuleRequest();
+        getServiceRuleRequest.setNamespace(namespace);
+        getServiceRuleRequest.setService(service);
+        getServiceRuleRequest.setRuleType(ServiceEventKey.EventType.ROUTING);
+        ServiceRuleResponse serviceRule = consumerAPI.getServiceRule(getServiceRuleRequest);
+        return JSONObject.toJSONString(serviceRule);
+    }
+    
 }

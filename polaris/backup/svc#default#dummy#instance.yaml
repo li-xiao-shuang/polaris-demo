@@ -13,9 +13,9 @@ service:
   cmdb_mod3: ""
   comment: ""
   owners: "Polaris"
-  ctime: "2021-12-03 23:30:27"
-  mtime: "2021-12-03 23:30:27"
-  revision: "eb3d10a4d961229257532a82d5553ae654609e09"
+  ctime: "2021-12-28 15:01:55"
+  mtime: "2021-12-28 15:01:55"
+  revision: "ebda8f108892144f92674cb410b2175b4be6f731"
   platform_id: ""
 instances:
 - id: "2b6adf9bc1d4367d36769504c35e4ff3e58a02b2"
@@ -23,21 +23,22 @@ instances:
   namespace: "default"
   host: "127.0.0.1"
   port: 8111
-  protocol: ""
-  version: ""
+  protocol: "http"
+  version: "1.0"
   priority: 0
   weight: 100
   healthCheck:
     type: "HEARTBEAT"
     heartbeat:
-      ttl: 2
+      ttl: 5
   healthy: false
   isolate: false
   metadata:
-    version: ""
-    protocol: ""
+    env: "test"
+    version: "1.0"
+    protocol: "http"
   logic_set: ""
-  mtime: "2021-12-03 23:30:34"
-  revision: "7d4531fb941c442db93608b9dd0cecf3"
+  mtime: "2021-12-28 17:22:40"
+  revision: "abc0d1105652436280d4ef59ea7f037f"
   enableHealthCheck: true
   vpc_id: ""

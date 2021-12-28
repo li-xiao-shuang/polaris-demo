@@ -24,6 +24,10 @@ import com.tencent.polaris.factory.api.DiscoveryAPIFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author lixiaoshuang
  */
@@ -33,35 +37,32 @@ public class ProviderController {
     
     private ProviderAPI providerAPI = DiscoveryAPIFactory.createProviderAPI();
     
-    
     /**
      * 服务注册
      *
      * @return
      */
     @RequestMapping("register")
-    public String register() throws InterruptedException {
+    public String register() {
         
         InstanceRegisterRequest request = new InstanceRegisterRequest();
         request.setNamespace("default");
         request.setService("dummy");
         request.setHost("127.0.0.1");
         request.setPort(8111);
-        request.setTtl(2);
+        request.setTtl(5);
         InstanceRegisterResponse register = providerAPI.register(request);
         hartBeta();
         
-        providerAPI.destroy();
         return register.getInstanceId();
     }
     
     /**
      * 上报心跳
-     *
-     * @throws InterruptedException
      */
-    public void hartBeta() throws InterruptedException {
-        while (true) {
+    public void hartBeta() {
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
             InstanceHeartbeatRequest request = new InstanceHeartbeatRequest();
             request.setNamespace("default");
             request.setService("dummy");
@@ -69,7 +70,6 @@ public class ProviderController {
             request.setPort(8111);
             providerAPI.heartbeat(request);
             System.out.println("hart beata");
-            Thread.sleep(3000);
-        }
+        }, 0, 5, TimeUnit.SECONDS);
     }
 }

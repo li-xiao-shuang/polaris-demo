@@ -1,0 +1,46 @@
+---
+code: 200000
+info: "execute success"
+type: "ROUTING"
+service:
+  name: "dummy"
+  namespace: "default"
+  revision: "6bf9fde45196402eae2be28463650963"
+routing:
+  service: "dummy"
+  namespace: "default"
+  inbounds:
+  - sources:
+    - service: "*"
+      namespace: "*"
+      metadata:
+        client:
+          value: "app1"
+    destinations:
+    - service: "dummy"
+      namespace: "default"
+      metadata:
+        client:
+          value: "app1"
+      priority: 0
+      weight: 100
+      isolate: true
+  outbounds:
+  - sources:
+    - service: "dummy"
+      namespace: "default"
+      metadata:
+        client:
+          value: "app2"
+    destinations:
+    - service: "*"
+      namespace: "*"
+      metadata:
+        client:
+          value: "app2"
+      priority: 0
+      weight: 100
+      isolate: true
+  ctime: "2021-12-28 16:41:37"
+  mtime: "2021-12-28 17:33:08"
+  revision: "6bf9fde45196402eae2be28463650963"
