@@ -18,7 +18,6 @@ package com.example.polaris;
 
 import com.tencent.polaris.factory.api.RouterAPIFactory;
 import com.tencent.polaris.router.api.core.RouterAPI;
-import com.tencent.polaris.router.api.rpc.ProcessLoadBalanceRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
